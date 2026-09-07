@@ -1,0 +1,25 @@
+# Environment files
+.env
+.env.local
+*.env
+
+# Python & Django
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+venv/
+.venv/
+media/
+staticfiles/
+
+# Node & React
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# System & IDE
+.DS_Store
+.vscode/
+.idea/
