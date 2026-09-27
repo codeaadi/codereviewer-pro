@@ -142,11 +142,19 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES':('Bearer',),
 }
 
-CORS_ALLOWED_ORIGINS = [
-    'https://localhost:5173',
-    'https://127.0.0.1:5173',
+CORS_ALLOW_ALL_ORIGINS = True  # Allows local Vite dev and future Vercel deployments
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 ]
-CORS_ALLOW_CREDENTIALS =True
 
 #Celert Configuration
 # Locally defaults to localhost Redia or memory fallback if Redis isn`t running yet

@@ -105,12 +105,14 @@ class PullRequestViewSet(viewsets.ReadOnlyModelViewSet):
 
 class CodeReviewViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CodeReviewSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
 
     def get_queryset(self):
-        return CodeReview.objects.filter(
-            pull_request__repository__owner=self.request.user
-        ).order_by('-created_at')
+        return CodeReview.objects.all().order_by('-created_at')
+        # filter(
+        #     pull_request__repository__owner=self.request.user
+        # ).order_by('-created_at')
 
     @action(detail=False, methods=['post'], permission_classes=[permissions.AllowAny])
     def test_audit(self, request):
