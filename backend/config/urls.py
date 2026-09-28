@@ -20,7 +20,18 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-
+from django.http import JsonResponse
+def health_check(request):
+    return JsonResponse({
+        "status": "healthy",
+        "service": "CodeReviewer Pro API",
+        "version": "1.0.0",
+        "endpoints": {
+            "reviews": "/api/reviews/",
+            "admin": "/admin/"
+        }
+    })
+    
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
