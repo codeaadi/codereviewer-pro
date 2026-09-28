@@ -25,9 +25,20 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-dev-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS configuration
+ALLOWED_HOSTS = ['*']
 
+# Explicitly add Render hostname if available
+RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
+# Also accept comma-separated list from environment variable if set
+ENV_ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS')
+if ENV_ALLOWED_HOSTS:
+    ALLOWED_HOSTS.extend([h.strip() for h in ENV_ALLOWED_HOSTS.split(',')])
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Application definition
 
 INSTALLED_APPS = [
